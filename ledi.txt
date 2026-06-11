@@ -1,0 +1,16 @@
+Stripe demo
+DEMO
+
+Andi Cakolli
+6:33 PM
+T'vyn .env me shti STRIPE edhe me kqyr qysh me konektu me DEMO
+SK_TEST .env
+te vyn
+
+Andi Cakolli
+6:35 PM
+https://github.com/RedonMehmeti/Stripe-Online-Payment
+STRIPE_SECRET_KEY
+
+KEY e mer te accounti jot
+/create-payment
