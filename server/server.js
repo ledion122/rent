@@ -31,7 +31,8 @@ const io = new Server(httpServer, {
 connectDB();
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+const corsOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(s => s.trim()) : ['http://localhost:5173'];
+app.use(cors({ origin: corsOrigins, credentials: true }));
 
 // Stripe webhook — needs raw body before express.json
 const stripe = process.env.STRIPE_SECRET_KEY && !process.env.STRIPE_SECRET_KEY.includes('placeholder')
@@ -99,6 +100,10 @@ require('./sockets/index')(io);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-httpServer.listen(PORT, () => {
-  console.log(`RentKosova server running on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  httpServer.listen(PORT, () => {
+    console.log(`RentKosova server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
